@@ -12,5 +12,20 @@ package q5
 //o menor `i` é encontrado de forma que namei ainda não exista no banco de dados.
 
 func Register(names []string) []string {
-	return nil
+		nomesRegistrados := make(map[string]bool)
+	resultados := make([]string, len(names))
+
+	for i, nome := range names {
+		if _, existe := nomesRegistrados[nome]; !existe {
+			nomesRegistrados[nome] = true
+			resultados[i] = "OK"
+		} else {
+			// Gerar um novo nome sugerido
+			sugestao := gerarSugestao(nome, nomesRegistrados)
+			nomesRegistrados[sugestao] = true
+			resultados[i] = sugestao
+		}
+	}
+
+	return resultados
 }

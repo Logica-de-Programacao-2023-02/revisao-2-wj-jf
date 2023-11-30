@@ -21,5 +21,29 @@ type Participant struct {
 }
 
 func CalculateTeams(participants []Participant) int {
-	return 0
+// Contadores para programadores e matemáticos
+    numProgramadores := 0
+    numMatematicos := 0
+
+    // Contadores para equipes formadas
+    equipesFormadas := 0
+
+    // Iterar sobre os participantes para contar programadores e matemáticos
+    for _, participant := range participants {
+        switch participant.Role {
+        case "programador":
+            numProgramadores++
+        case "matemático":
+            numMatematicos++
+        }
+    }
+
+    // Calcular o número máximo de equipes que podem ser formadas
+    for numProgramadores >= 1 && numMatematicos >= 1 {
+        numProgramadores--
+        numMatematicos--
+        equipesFormadas++
+    }
+
+    return equipesFormadas
 }
