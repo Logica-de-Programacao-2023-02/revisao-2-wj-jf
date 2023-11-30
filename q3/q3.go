@@ -18,5 +18,21 @@ type Video struct {
 }
 
 func ChooseVideo(videos []Video, time int) (Video, error) {
-	return Video{}, nil
+		var videoEscolhido Video
+	maiorEntretenimento := -1
+
+	for _, video := range videos {
+		if video.Duration <= tempoDisponivel {
+			if video.Entertainment > maiorEntretenimento {
+				videoEscolhido = video
+				maiorEntretenimento = video.Entertainment
+			}
+		}
+	}
+
+	if maiorEntretenimento == -1 {
+		return Video{}, errors.New("nenhum vídeo adequado encontrado")
+	}
+
+	return videoEscolhido, nil
 }
